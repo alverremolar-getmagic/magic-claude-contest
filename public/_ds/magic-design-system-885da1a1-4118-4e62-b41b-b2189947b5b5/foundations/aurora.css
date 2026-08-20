@@ -1,0 +1,12 @@
+.m-aurora{position:relative;isolation:isolate;overflow:clip}
+.m-aurora::before{content:"";position:absolute;inset:-15% -15% auto -15%;height:95%;z-index:-1;pointer-events:none;background:var(--rainbow);filter:blur(120px);opacity:.62;will-change:transform;animation:m-drift 28s var(--ease) infinite}
+.m-aurora-top::before{inset:-45% -12% auto -12%;height:90%;opacity:.55;filter:blur(140px)}
+.m-aurora-soft::before{opacity:.38}
+.m-aurora-still::before{animation:none}
+.m-wash{position:relative;isolation:isolate}
+.m-wash::before{content:"";position:absolute;inset:0 0 auto 0;height:60%;z-index:-1;pointer-events:none;background:var(--hero-wash)}
+.m-wash-ambient{background:var(--wash-ambient)}
+.m-grad{background:var(--sphere);-webkit-background-clip:text;background-clip:text;color:transparent;animation:m-wipe 800ms var(--ease) both}
+.m-grad-still{animation:none}
+@keyframes m-drift{0%,100%{transform:translate3d(0,0,0) scale(1)}33%{transform:translate3d(3%,-2%,0) scale(1.08)}66%{transform:translate3d(-2%,2%,0) scale(1.04)}}
+@keyframes m-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}

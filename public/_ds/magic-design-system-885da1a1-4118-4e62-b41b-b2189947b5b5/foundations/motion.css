@@ -1,0 +1,25 @@
+@keyframes m-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.m-rise{animation:m-rise var(--t-slow) var(--ease) both}
+.m-stagger>*{animation:m-rise var(--t-slow) var(--ease) both}
+.m-stagger>*:nth-child(1){animation-delay:0ms}
+.m-stagger>*:nth-child(2){animation-delay:70ms}
+.m-stagger>*:nth-child(3){animation-delay:140ms}
+.m-stagger>*:nth-child(4){animation-delay:210ms}
+.m-stagger>*:nth-child(5){animation-delay:280ms}
+.m-stagger>*:nth-child(6){animation-delay:350ms}
+@keyframes m-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes m-scale-in{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+.m-overlay-in{animation:m-fade-in var(--t-base) var(--ease) both}
+.m-panel-in{animation:m-scale-in var(--t-base) var(--ease) both}
+.m-panel-out{animation:m-scale-in var(--t-fast) var(--ease-exit) reverse both}
+@keyframes m-spin{to{transform:rotate(360deg)}}
+.m-spinner{width:20px;height:20px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:m-spin 700ms linear infinite;display:inline-block}
+@keyframes m-pulse{50%{opacity:.45}}
+.m-skeleton{background:rgba(20,10,60,.07);border-radius:10px;animation:m-pulse 1.6s var(--ease) infinite}
+@keyframes m-shimmer{to{background-position:-200% 50%}}
+.m-shimmer{background:linear-gradient(90deg,var(--ink-support) 40%,var(--violet-mid) 50%,var(--ink-support) 60%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:m-shimmer 1.8s linear infinite}
+.m-link{color:var(--violet);text-decoration:none;position:relative;font-weight:500}
+.m-link::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform var(--t-base) var(--ease)}
+.m-link:hover::after{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}.m-aurora::before{animation:none}}
+@media print{.m-aurora::before,.m-wash::before{display:none}.m-card,.m-media{box-shadow:none;border:1px solid #D8DAE6}}

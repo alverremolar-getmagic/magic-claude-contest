@@ -1,0 +1,10 @@
+{
+  "name": "claude-contest-landing",
+  "compatibility_date": "2026-08-20",
+  // Assets-only Worker: no "main" script, wrangler just serves ./public.
+  // Without this block `wrangler deploy` cannot guess where the site lives.
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  }
+}

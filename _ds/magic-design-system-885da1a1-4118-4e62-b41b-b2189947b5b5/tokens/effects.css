@@ -1,0 +1,9 @@
+:root{
+  --r-input:16px;--r-card:24px;--r-lg:32px;--r-pillow:50px;--r-pill:9999px;
+  --shadow-sm:0 12px 24px 0 rgba(7,0,200,.06);--shadow-card:0 30px 40px 0 rgba(7,0,200,.10);--shadow-lift:0 40px 80px 0 rgba(7,0,200,.12);--shadow-button:0 8px 20px 0 rgba(0,0,0,.14);
+  --t-fast:150ms; /* @kind other */
+  --t-base:220ms; /* @kind other */
+  --t-slow:300ms; /* @kind other */
+  --ease:cubic-bezier(.22,.61,.36,1); /* @kind other */
+  --ease-exit:cubic-bezier(.4,0,1,1); /* @kind other */
+}

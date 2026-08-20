@@ -1,0 +1,10 @@
+:root{
+  --bg:#F3F5FA;--wash:#E6E6F8;--card:rgba(255,255,255,0.92);--near-black:#0A0B19;--black:#000000;
+  --ink:#000000;--ink-soft:#1A1A1A;--ink-support:#6E6B7B;--ink-decorative:#918FA9;--ink-inverse:#FFFFFF;--ink-muted-dark:#B8B5DA;
+  --violet:#5200E3;--violet-deep:#2C00D5;--violet-mid:#754EFF;--cyan:#14E9ED;--magenta:#9B00FF;--pink:#FF8EA9;--warm-pink:#FF6BA0;--error:#C41E3A;
+  --chart-1:#5200E3;--chart-2:#E0407A;--chart-3:#9B00FF;--chart-4:#0891A8;--chart-5:#754EFF;
+  --accent-1:#5200E3;--accent-2:#9B00FF;--accent-3:#C2185B;--accent-4:#06707F;--accent-5:#2C00D5;
+  --rainbow:linear-gradient(135deg, rgba(255,98,0,.40) 0%, rgba(117,78,255,.80) 51%, rgba(0,144,255,.40) 100%); /* @kind other */
+  --sphere:linear-gradient(135deg, #FF8EA9 0%, #9B00FF 50%, #14E9ED 100%); /* @kind other */
+  --hero-wash:linear-gradient(180deg, #E6E6F8 0%, rgba(230,230,248,0) 100%); /* @kind other */
+}
