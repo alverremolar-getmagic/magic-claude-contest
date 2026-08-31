@@ -518,10 +518,6 @@
           overflow-x: clip
         }
 
-        .dc-tip {
-          width: min(320px, calc(100vw - 40px))
-        }
-
         /* ---------- laptop / small desktop ---------- */
         @media (max-width: 1180px) {
           .dc-nav {
@@ -698,63 +694,6 @@
 
           .m-cta .m-h2 {
             font-size: clamp(29px, 7vw, 50px) !important
-          }
-        }
-
-        /* Click-time notice on the submit CTAs. .m-btn sets white-space:nowrap
-           and the tip inherits it, hence the explicit reset. */
-        .dc-btn-purple {
-          position: relative
-        }
-
-        .dc-tip {
-          position: absolute;
-          bottom: calc(100% + 14px);
-          left: 50%;
-          z-index: 20;
-          width: 320px;
-          padding: 13px 17px;
-          border-radius: 14px;
-          background: rgba(12, 10, 26, .97);
-          border: 1px solid rgba(199, 125, 255, .38);
-          box-shadow: 0 18px 40px rgba(7, 0, 200, .38), 0 0 22px rgba(155, 0, 255, .22);
-          color: rgba(255, 255, 255, .88);
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 1.45;
-          letter-spacing: 0;
-          white-space: normal;
-          text-align: center;
-          text-wrap: pretty;
-          opacity: 0;
-          transform: translate(-50%, 6px);
-          pointer-events: none;
-          transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease)
-        }
-
-        /* rotated square straddling the bottom edge = the pointer */
-        .dc-tip::after {
-          content: "";
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          width: 10px;
-          height: 10px;
-          margin: -6px 0 0 -5px;
-          background: rgba(12, 10, 26, .97);
-          border-right: 1px solid rgba(199, 125, 255, .38);
-          border-bottom: 1px solid rgba(199, 125, 255, .38);
-          transform: rotate(45deg)
-        }
-
-        .dc-btn-purple.is-tipped .dc-tip {
-          opacity: 1;
-          transform: translate(-50%, 0)
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .dc-tip {
-            transition: none
           }
         }
 
@@ -4356,7 +4295,6 @@ class Component extends DCLogic {
     this.setupBars();
     this.setupScenes();
     this.setupChat();
-    this.setupSubmitTooltip();
     const track = this.trackRef.current;
     if (!track) return;
     const A = this.filmARef.current, B = this.filmBRef.current;
@@ -4529,54 +4467,6 @@ class Component extends DCLogic {
     };
   }
 
-  // The submission form isn't live yet, so the CTAs say so on click rather than
-  // navigating to a dead "#". aria-describedby carries the same text to screen
-  // readers on focus, which a click-only reveal would never announce.
-  setupSubmitTooltip() {
-    const btns = Array.from(document.querySelectorAll('.dc-btn-purple'));
-    if (!btns.length) return;
-
-    const MSG = 'Submission form not yet accessible. Build your workflow first to '
-      + 'prepare and then return here to submit next week.';
-    let open = null, timer = null;
-
-    const hide = () => {
-      if (timer) { clearTimeout(timer); timer = null; }
-      if (open) { open.classList.remove('is-tipped'); open = null; }
-    };
-
-    btns.forEach((btn, i) => {
-      const tip = document.createElement('span');
-      tip.className = 'dc-tip';
-      tip.id = 'dc-tip-' + i;
-      tip.setAttribute('role', 'tooltip');
-      tip.textContent = MSG;
-      btn.appendChild(tip);
-      btn.setAttribute('aria-describedby', tip.id);
-
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        const wasOpen = open === btn;
-        hide();
-        if (wasOpen) return;
-        open = btn;
-        btn.classList.add('is-tipped');
-        timer = setTimeout(hide, 7000);
-      });
-    });
-
-    // the tip is pointer-events:none, so any stray click lands outside it
-    const onAway = e => { if (open && !open.contains(e.target)) hide(); };
-    const onKey = e => { if (e.key === 'Escape') hide(); };
-    document.addEventListener('click', onAway);
-    document.addEventListener('keydown', onKey);
-    this._tipOff = () => {
-      hide();
-      document.removeEventListener('click', onAway);
-      document.removeEventListener('keydown', onKey);
-    };
-  }
-
   // Chat vignette: types each turn out character by character, then clears and
   // replays. Text nodes are rewritten in place so inline markup (the connector
   // <b> tags) survives retyping without rebuilding the DOM.
@@ -4676,7 +4566,6 @@ class Component extends DCLogic {
     if (this._chatIO) this._chatIO.disconnect();
     if (this._chatStop) this._chatStop();
     if (this._sceneOff) this._sceneOff();
-    if (this._tipOff) this._tipOff();
   }
 
   renderVals() {
